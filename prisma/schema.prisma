@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// enum Status {
+//   ACTIVE
+//   INACTIVE
+//   DISABLE
+//   WAITING_FOR_ACTIVATION
+// }
+
+model Customer {
+  id     Int    @id @default(autoincrement())
+  name   String
+  email  String
+  taxId  String @map("tax_id")
+  phone  String
+  status String
+
+  @@map("customer")
+}
