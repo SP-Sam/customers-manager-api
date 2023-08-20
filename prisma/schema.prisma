@@ -12,7 +12,7 @@ model Customer {
   name   String
   email  String @unique
   taxId  String @unique @map("tax_id")
-  phone  String @unique
+  phone  String
   status String
 
   @@map("customer")
