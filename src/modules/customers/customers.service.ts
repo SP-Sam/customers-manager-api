@@ -12,12 +12,8 @@ export class CustomersService {
     return this.prismaService.customer.create({ data });
   }
 
-  async findAll(page: number, perPage: number) {
-    const skip = page * perPage - perPage;
-
+  async findAll() {
     return this.prismaService.customer.findMany({
-      skip,
-      take: perPage,
       orderBy: { name: 'asc' },
     });
   }

@@ -9,7 +9,6 @@ import {
   HttpCode,
   HttpException,
   HttpStatus,
-  Query,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
@@ -46,9 +45,9 @@ export class CustomersController {
 
   @HttpCode(200)
   @Get()
-  async findAll(@Query('page') page = '1', @Query('perPage') perPage = '20') {
+  async findAll() {
     try {
-      const customers = this.customersService.findAll(+page, +perPage);
+      const customers = this.customersService.findAll();
 
       return customers;
     } catch (e) {
