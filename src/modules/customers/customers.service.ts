@@ -14,7 +14,7 @@ export class CustomersService {
 
   async findAll() {
     return this.prismaService.customer.findMany({
-      orderBy: { name: 'asc' },
+      orderBy: { id: 'asc' },
     });
   }
 
