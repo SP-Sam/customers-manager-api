@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   HttpCode,
   HttpException,
   HttpStatus,
@@ -95,34 +94,9 @@ export class CustomersController {
         throw new HttpException(
           {
             status: HttpStatus.BAD_REQUEST,
-            error: e.meta.cause,
+            error: e.message.replace(/(\r\n|\n|\r)/gm, ''),
           },
           HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  @HttpCode(204)
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    try {
-      const customer = await this.customersService.remove(+id);
-
-      return customer;
-    } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        throw new HttpException(
-          {
-            status: HttpStatus.BAD_REQUEST,
-            error: e.meta.cause,
-          },
-          HttpStatus.BAD_REQUEST,
-          {
-            cause: e,
-          },
         );
       }
 

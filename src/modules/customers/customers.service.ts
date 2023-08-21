@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { PrismaService } from '../../database/prisma.service';
-import { Status } from '../../enum/customerStatus';
 
 @Injectable()
 export class CustomersService {
@@ -24,14 +23,5 @@ export class CustomersService {
 
   async update(id: number, data: UpdateCustomerDto) {
     return this.prismaService.customer.update({ where: { id }, data });
-  }
-
-  async remove(id: number) {
-    return this.prismaService.customer.update({
-      where: { id },
-      data: {
-        status: Status.DISABLE,
-      },
-    });
   }
 }
